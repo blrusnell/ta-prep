@@ -31,6 +31,17 @@ class App extends React.Component {
     .catch((error) => {
       console.log(error);
     })
+
+    axios.get('/todo')
+    .then((response) => {
+      this.setState({
+        todos: response.data
+      })
+      console.log(response.data);
+    })
+    .catch((error) => {
+      console.log(error);
+    })
   }
 
   componentDidMount(e) {
@@ -52,7 +63,6 @@ class App extends React.Component {
       <div>
         <input type="text" onChange={this.handleChange}></input>
         <input type="submit" onClick={this.handleSubmit}></input>
-        {/* <p>{this.state.todos[0]}</p> */}
         {this.state.todos.map((todo) => <p>{todo.text}</p>)}
       </div>
     )

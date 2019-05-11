@@ -36,4 +36,4 @@ const getAllTodos = (callback) => {
     });
 }
 
-module.exports = {addOneTodo, getAllTodos}
+module.exports = {addOneTodo, getAllTodos};
