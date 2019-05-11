@@ -7,12 +7,13 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      todo: ''
+      todo: '',
+      todos: ['placeholder']
     }
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-
+    this.componentDidMount = this.componentDidMount.bind(this);
   }
 
   handleChange(e) {
@@ -32,11 +33,27 @@ class App extends React.Component {
     })
   }
 
+  componentDidMount(e) {
+    //e.preventDefault();
+    axios.get('/todo')
+    .then((response) => {
+      this.setState({
+        todos: response.data
+      })
+      console.log(response.data);
+    })
+    .catch((error) => {
+      console.log(error);
+    })
+  }
+
   render() {
     return (
       <div>
         <input type="text" onChange={this.handleChange}></input>
         <input type="submit" onClick={this.handleSubmit}></input>
+        {/* <p>{this.state.todos[0]}</p> */}
+        {this.state.todos.map((todo) => <p>{todo.text}</p>)}
       </div>
     )
   }
